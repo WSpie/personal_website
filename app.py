@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory, redirect, url_for, render_template
 from flask_cors import CORS
 from argparse import ArgumentParser
 from time import time
@@ -15,23 +15,40 @@ parser.add_argument('--username', default=f'user_{int(time())}')
 opt = parser.parse_args()
 
 logger = Logger(opt.username)
-app = Flask(opt.username)
+
+app = Flask(opt.username, template_folder='apps/templates', static_folder='apps/static')
 CORS(app)
 
-@app.route('https://wspie.github.io/personal_website/')
+@app.route('/') #https://wspie.github.io/personal_website/
 def index():
-    return "Welcome to Lipai Huang's API!"
+    return render_template('index.html')
 
-@app.route('/profile', methods=['GET'])
+@app.route('/profile')
 def profile():
-    # Your code to handle profile request
-    return jsonify({'message': 'Profile information'})
+    return render_template('profile.html')
 
-@app.route('/gpt-api-play', methods=['POST'])
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    try:
+        if request.method == 'POST':
+            username = request.form['username']
+            token = request.form['token']
+            # You can handle the token and username here as needed
+            return redirect(f'/gpt_api_play?username={username}')
+        else:
+            return render_template('login.html')
+    except Exception as e:
+        print(e)
+
+@app.route('/gpt_api_play')
 def gpt_api_play():
-    data = request.json
-    # Your code to handle GPT API play request
-    return jsonify({'result': 'GPT API result'})
+    username = request.args.get('username')
+    return render_template('gpt_api_play.html', username=username)
+
+@app.route('/test')
+def test_route():
+    return 'This is a test route'
+
 
 if __name__ == '__main__':
     app.run(debug=True)

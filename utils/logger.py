@@ -13,7 +13,7 @@ class Logger:
     def configure_logging(self):
         self.user_dir = f'users/{self.username}'
         os.makedirs(self.user_dir, exist_ok=True)
-        user_log_dir = f'{self.ser_dir}/logs'
+        user_log_dir = f'{self.user_dir}/logs'
         os.makedirs(user_log_dir, exist_ok=True)
         self.log_index = len(os.listdir(user_log_dir))
         self.log_file = os.path.join(user_log_dir, f'log_{self.log_index}.log')

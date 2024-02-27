@@ -34,3 +34,10 @@ footer {
     text-align: center;
     margin-top: 20px;
 }
+
+/* Add your CSS styles here */
+#user-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
