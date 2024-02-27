@@ -1,29 +1,21 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Python App</title>
+    <title>Lipai Huang's Website</title>
+    <link rel="stylesheet" type="text/css" href="css.style.css">
 </head>
 <body>
-    <input type="text" id="inputData" placeholder="Enter data">
-    <button onclick="sendData()">Send Data</button>
-    <div id="result"></div>
-
-    <script>
-        function sendData() {
-            var data = document.getElementById('inputData').value;
-            fetch('http://localhost:5000/process', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({data: data})
-            })
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('result').innerText = data.result;
-            });
-        }
-    </script>
+    <header>
+        <h1>Lipai Huang's Website</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="gpt-api-play.html">GPT API Play</a></li>
+        </ul>
+    </nav>
+    <footer>
+        <p>&copy; 2024 Lipai Huang. All rights reserved.</p>
+    </footer>
 </body>
 </html>
